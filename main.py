@@ -14,10 +14,11 @@ def main():
 
     # UI 렌더링
     keywords, days = ui.render_sidebar()
-    tab1, tab2, ta3 = ui.render_main_page()
+    tab1, tab2, tab3 = ui.render_main_page()
 
     # 각 탭 렌더링
     ui.render_news_collection(tab1, keywords, days)
+    ui.render_data_analysis(tab2)
 
 
 if __name__ == "__main__":

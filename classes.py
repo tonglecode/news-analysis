@@ -107,3 +107,21 @@ class NewsAnalysisUI:
 
             if st.session_state.news_data:
                 st.dataframe(pd.DataFrame(st.session_state.news_data))
+
+    def render_data_analysis(self, tab):
+        with tab:
+            if not st.session_state.news_data:
+                st.warning("먼저 뉴스를 수집해주세요.")
+                return
+            df = pd.DataFrame(st.session_state.news_data)
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.subheader("키워드별 뉴스 분포")
+                fig = px.pie(df, names="keyword")
+                st.plotly_chart(fig)
+
+            with col2:
+                st.subheader("언론사별 뉴스 수")
+                fig = px.bar(df["press"].value_counts().head(10))
+                st.plotly_chart(fig)
